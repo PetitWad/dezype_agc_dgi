@@ -1,0 +1,66 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-top: 70px;
+}
+
+span{
+    margin: auto;
+}
+.btn-home{
+    margin: auto;
+}
+
+.btn-home img{
+    margin-bottom: -27px;
+}
+.btn-log{
+    height: 70px;
+    width: 350px;
+    font-size: 25px;
+    margin-top: 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    
+}
+
+.btn-log:hover{
+    box-shadow: 5px 10px 5px  black;
+}
+
+.modal{
+    width: 400px;
+    margin-left: 470px;
+    margin-top: 100px;
+}
+
+.modal-title{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.modal-body{
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.error{
+    background-color: #F2DEDE;
+    color: red;
+    text-align: center;
+    padding: 10px;
+    margin: auto;
+}
+
+.bi-lock, .bi-person{
+    font-size: 25px;
+    position: absolute;
+}
+
+.modal-body .form-control{
+    margin-bottom: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 30px;
+}

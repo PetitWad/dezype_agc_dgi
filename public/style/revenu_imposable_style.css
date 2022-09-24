@@ -1,0 +1,25 @@
+
+.titre-revenu h2{
+    margin-top: 80px;
+}
+
+.error{
+color: red;
+font-size: 18px;
+font-weight: bolder;
+}
+
+#style_rImpsable{
+margin-top: 40px;
+}
+
+#btn-operation{
+margin-top: 50px;
+}
+
+.alerte{
+color: black;
+font-size: 20px;
+padding: 12px;
+box-shadow: 0px 2px 1px greenyellow;
+}
