@@ -1,30 +1,32 @@
+<?php
 
-<div class="container">
-    <img src="../public/images/logo.png" alt="" style="width: 20%;">
-    <form action="../controller/postPay.php" method="POST">
-        <script
-            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="pk_test_51LlY2LHxPTQ0uXfNHvH6FErV7LOC07Q8zLLy17pURCVJShPWTdoSJnxx2AVl5yYcGmIesbUTYydmQjuNmrltN80W009HM5Lnqm"
-            data-amount="<?= $pay ?>"
-            data-name="AGC-DGI"
-            data-description="Direction Generale des Impots"
-            data-locale="auto"
-            data-image= <?= "<img src='../public/images/logo.png'>" ?>
-            data-currency="USD"
-            data-label="Valider | Payer">
-        </script>
-    </form>
-</div>
+require '../vendor/autoload.php';
+// This is your test secret API key.
+//\Stripe\Stripe::setApiVersion("2022-08-01");
+\Stripe\Stripe::setApiKey('sk_test_51KHugMBPcrw5s6v3oAXZpQ2dfg7YiyTkNB06MBChlSyYWND0SLICs8D59LlJvLK2ADDgtplIhMfOnLD65UrxgSEf00JcxUt03z');
 
-<style>
-    .container{
-        position: absolute;
-        left: 500px;
-        top: 30%;
-    }
+header('Content-Type: application/json');
 
-    form{
-        margin-top: 20px;
-        margin-left: 15px;
-    }
-</style>
+$YOUR_DOMAIN = 'http://localhost:4000/';
+
+$checkout_session = \Stripe\Checkout\Session::create([
+//    'payment_method_types' => ['cards'],
+    'line_items' => [[
+        'price_data' => [
+            'product_data' => [
+                'name' => 'Name',
+            ],
+            'unit_amount' => $_GET['pay'] * 100,
+            'currency' => 'HTG',
+        ],
+        'quantity' => 1,
+        'description' => 'Name',
+    ]],
+    'mode' => 'payment',
+    'success_url' => $YOUR_DOMAIN . 'simple_pages/success.php?session_id={CHECKOUT_SESSION_ID}',
+    'cancel_url' => $YOUR_DOMAIN . 'simple_pages/?session_id={CHECKOUT_SESSION_ID}',
+]);
+
+header("HTTP/1.1 303 See Other");
+header("Location: " . $checkout_session->url);
+

@@ -28,16 +28,16 @@ $code = $_SESSION['code'];
         $rslt_fdu_et_cas = $salaire_mensuel * 0.1;
 
         $pay = $rslt_bonus + $rslt_revenu_distribuer + $rslt_fdu_et_cas;
-    
+
 
     $req = $bd->prepare("INSERT INTO retenu_a_source VALUES(:code, :annefiscal1, :annefiscal2, :mois, :salaire_mensuel, :bonus, :revenu_distribuer, :caisse_assistance, :font_urgence, :datePreleve, :commune)");
-        
+
     $dateEnrg = date('Y-m-d');
     $req->bindParam(':code', $code);
-    $req->bindParam(':annefiscal1', $annefiscal1); 
-    $req->bindParam(':annefiscal2', $annefiscal2); 
-    $req->bindParam(':mois', $mois); 
-    $req->bindParam(':salaire_mensuel', $salaire_mensuel); 
+    $req->bindParam(':annefiscal1', $annefiscal1);
+    $req->bindParam(':annefiscal2', $annefiscal2);
+    $req->bindParam(':mois', $mois);
+    $req->bindParam(':salaire_mensuel', $salaire_mensuel);
     $req->bindParam(':bonus', $rslt_bonus);
     $req->bindParam(':revenu_distribuer', $revenu_distribuer);
     $req->bindParam(':caisse_assistance', $rslt_fdu_et_cas);
@@ -47,9 +47,9 @@ $code = $_SESSION['code'];
     $reqOk = $req->execute();
 
     if($reqOk){
-          header("Location: pay.php?pay=".$pay);  
+          header("Location: pay.php?pay=".$pay);
         }else{
-        header("Location: retenuSource.php?error=Erreur d'enregistrement 🚫");      
+        header("Location: retenuSource.php?error=Erreur d'enregistrement 🚫");
     }
 
     }
@@ -75,19 +75,19 @@ $code = $_SESSION['code'];
     <title>retenu a la source</title>
 </head>
 <body>
-   <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark sb-nav-fixed">            
+   <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark sb-nav-fixed">
         <a class="navbar-brand ps-3" href="index.html"><img src="../public/images/logo.png" style="width:20%"; alt=""> AGC-DGI</a>
-          
+
       <?php include_once('navbar.php');?>
         <div id="layoutSidenav">
-         <?php 
+         <?php
          require '../fonctions/authentifier.php';
          est_connecter();
          include_once('dashboard.php');?>
             <div id="layoutSidenav_content">
             <div class="container-fluid">
             <!-- </div></div></div></nav> -->
-        
+
             <div class="container-fluid" style="position: relative; top: 300px;">
                 <div class="row">
                 <?php if(isset($_GET['error'])){ ?>
@@ -128,8 +128,8 @@ $code = $_SESSION['code'];
                            <label for="Commune">Commune</label>
                         <div class="mb-2">
                             <input type="text" name="commune" class="form-control" placeholder="Commune"  required>
-                       </div> 
-                              
+                       </div>
+
                     </div>
                         <div class="col-3">
                             <div class="mb-2">
@@ -154,7 +154,7 @@ $code = $_SESSION['code'];
                     </div>
                     <div class="col-6">
                     <div class="row">
-                            <label id="anneFiscal" for="">Annee fiscale en cours</label> 
+                            <label id="anneFiscal" for="">Annee fiscale en cours</label>
                             <div class="col-2"></div>
                             <div class="col-4">
                                 <div class="mb-2">
@@ -208,7 +208,7 @@ $code = $_SESSION['code'];
                     <th scope="col">date Preleve</th>
                 </thead>
                 <tbody>
-                    <?php while($rst =  $stateRetenu->fetch()){?> 
+                    <?php while($rst =  $stateRetenu->fetch()){?>
                     <tr>
                         <th scope="row"> <?= $rst['annefiscal1'] ." - ". $rst['annefiscal2'] ; ?> </th>
                         <td class="bcgris"> <?= $rst['mois']?></td>
@@ -217,12 +217,12 @@ $code = $_SESSION['code'];
                         <td class="bcgris"> <?= $rst['caisse_assistance']?> HTG</td>
                         <td class="bcgris"> <?= $rst['datePreleve']?></td>
                     </tr>
-                <?php } ?> 
-            </tbody> 
+                <?php } ?>
+            </tbody>
         </table>
      </div>
      <div class="col"></div>
-    </div>       
+    </div>
 </div>
 
 
@@ -234,8 +234,8 @@ $code = $_SESSION['code'];
         <script src="../js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="../js/datatables-simple-demo.js"></script>    
-    
+        <script src="../js/datatables-simple-demo.js"></script>
+
 </body>
 </html>
 
